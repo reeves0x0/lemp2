@@ -1,0 +1,45 @@
+version: '3'
+services:
+
+ web_srv:
+  image: nginx:latest
+  container_name: web_srv
+  restart: unless-stopped
+  volumes:
+   - ./nginx/vhosts:/etc/nginx/conf.d/
+   - ./nginx/www:/var/www/
+   - ./nginx/logs:/var/log/nginx/
+  ports:
+   - "80:80"
+   - "443:443"
+
+ database_srv:
+  image: mariadb:latest
+  container_name: database_srv
+  restart: unless-stopped
+  ports:
+   - "3306:3306"
+  environment:
+   MYSQL_ROOT_PASSWORD: strongrootpassword888***11
+   MYSQL_DATABASE: appbd
+   MYSQL_USER: appuser
+   MYSQL_PASSWORD: appbdpassword
+  volumes:
+    - ./mysql:/var/lib/mysql
+    - ./mysql:/etc/mysql
+
+  php_srv:
+   image: php:7.5-fpm
+   container_name: php_srv
+   volumes:
+    - ./nginx/www:/var/www
+   ports:
+    - "9000:9000"     на порт или  сокет  
+
+  memcached:
+    image: memcached:latest
+	container_name: mem_srv
+	restart: unless-stopped
+    ports:
+      - "11211:11211"
+
