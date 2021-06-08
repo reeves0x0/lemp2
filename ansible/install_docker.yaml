@@ -46,7 +46,7 @@
       shell: mkdir /opt/docker;cd /opt/docker;git clone "https://github.com/reeves0x0/lemp2.git";cd lemp2;docke-compose up -d
       args:
   	executable: /usr/bin/bash
-	
+
     - name: copy php pool conf
       copy:
       src: /opt/docker/lemp2/php-pool.conf
@@ -54,25 +54,24 @@
       owner: root
       group: root
       mode: 0644
-	
+
     - name: restart service php-fpm on docker container
       shell: docker exec -it php_srv systemctl restart php-fpm;exit
       args:
-        executable: /usr/bin/bash
-		
+        executable: /usr/bin/bash	
 
 - hosts: centos7-haproxy
 
   tasks:
     - name: upgrade all packages
       yum: name=* state=latest
-	  
+
   tasks:
     - name: install HAproxy
       yum:
         name: haproxy
         state: present
-		
+
   tasks:
    - name: copy haproxy conf
      src: ./haproxy.cfg
