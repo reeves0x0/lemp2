@@ -1,0 +1,89 @@
+---
+
+- hosts: centos7-lemp
+
+  tasks:
+    - name: upgrade all packages
+      yum: name=* state=latest
+  tasks:
+    - name: Install yum utils
+      yum:
+        name: yum-utils
+        state: latest
+ 
+    - name: install device-mapper-persistent-data
+      yum:
+        name: device-mapper-persistent-data
+        state: latest
+ 
+    - name: install lvm2
+      yum:
+        name: lvm2
+        state: latest
+ 
+    - name: Add Docker repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+ 
+    - name: install Docker
+      package:
+        name: docker-ce
+        state: latest
+ 
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: install docker-compose
+      shell: curl -L "https://github.com/docker/compose/releases/download/1.28.6/docker-compose-$(uname -s)-$(uname -m)" -o /usr/bin/docker-compose;chmod +x /usr/bin/docker-compose
+      args:
+        executable: /usr/bin/bash
+
+	- name: get docker file from git or hub
+	  shell: mkdir /opt/docker;cd /opt/docker;git clone "https://github.com/reeves0x0/lemp2.git";cd lemp2;docke-compose up -d
+	  args:
+	  	executable: /usr/bin/bash
+	
+	- name: copy php pool conf
+	  copy:
+	  	src: /opt/docker/lemp2/php-pool.conf
+		dst: /opt/docker/php-fpm/php-pool.conf
+		owner: root
+        group: root
+        mode: 0644
+	
+	- name: restart service php-fpm on docker container
+      shell: docker exec -it php_srv systemctl restart php-fpm;exit
+      args:
+        executable: /usr/bin/bash
+		
+
+- hosts: centos7-haproxy
+
+  tasks:
+    - name: upgrade all packages
+      yum: name=* state=latest
+	  
+  tasks:
+    - name: install HAproxy
+      yum:
+        name: haproxy
+        state: present
+		
+  tasks:
+   - name: copy haproxy conf
+     src: ./haproxy.cfg
+	 dst: /etc/haproxy/haproxy.cfg
+	 owner: root
+     group: root
+     mode: 0644
+
+   - name: Start haproxy service
+      service:
+        name: haproxy
+        state: started
+        enabled: yes
+
