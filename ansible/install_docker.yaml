@@ -87,3 +87,22 @@
         state: started
         enabled: yes
 
+- hosts: centos7-DB-master
+
+  tasks:
+   - name: copy my.cnf to master 
+     src: /opt/docker/mysql/master/my.cnf
+	 dst: /opt/docker/mysql/my.cnf
+	 owner: root
+     group: root
+     mode: 0644
+
+- hosts: centos7-DB-slave
+
+  tasks:
+   - name: copy my.cnf to slave 
+     src: /opt/docker/mysql/slave/my.cnf
+	 dst: /opt/docker/mysql/my.cnf
+	 owner: root
+     group: root
+     mode: 0644
