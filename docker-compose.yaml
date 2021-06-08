@@ -33,14 +33,14 @@ services:
    container_name: php_srv
    volumes:
     - ./nginx/www:/var/www
-	- ./php-fpm:/etc/php/7.5/fpm/pool.d/
+    - ./php-fpm:/etc/php/7.5/fpm/pool.d/
    ports:
     - "9000:9000"       
 
   memcached:
     image: memcached:latest
-	container_name: mem_srv
-	restart: unless-stopped
+    container_name: mem_srv
+    restart: unless-stopped
     ports:
       - "11211:11211"
 
