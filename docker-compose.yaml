@@ -33,8 +33,9 @@ services:
    container_name: php_srv
    volumes:
     - ./nginx/www:/var/www
+	- ./php-fpm:/etc/php/7.5/fpm/pool.d/
    ports:
-    - "9000:9000"     на порт или  сокет  
+    - "9000:9000"       
 
   memcached:
     image: memcached:latest
