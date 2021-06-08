@@ -42,20 +42,20 @@
       args:
         executable: /usr/bin/bash
 
-	- name: get docker file from git or hub
-	  shell: mkdir /opt/docker;cd /opt/docker;git clone "https://github.com/reeves0x0/lemp2.git";cd lemp2;docke-compose up -d
-	  args:
-	  	executable: /usr/bin/bash
+    - name: get docker file from git or hub
+      shell: mkdir /opt/docker;cd /opt/docker;git clone "https://github.com/reeves0x0/lemp2.git";cd lemp2;docke-compose up -d
+      args:
+  	executable: /usr/bin/bash
 	
-	- name: copy php pool conf
-	  copy:
-	  	src: /opt/docker/lemp2/php-pool.conf
-		dst: /opt/docker/php-fpm/php-pool.conf
-		owner: root
-        group: root
-        mode: 0644
+    - name: copy php pool conf
+      copy:
+      src: /opt/docker/lemp2/php-pool.conf
+      dst: /opt/docker/php-fpm/php-pool.conf
+      owner: root
+      group: root
+      mode: 0644
 	
-	- name: restart service php-fpm on docker container
+    - name: restart service php-fpm on docker container
       shell: docker exec -it php_srv systemctl restart php-fpm;exit
       args:
         executable: /usr/bin/bash
@@ -76,8 +76,8 @@
   tasks:
    - name: copy haproxy conf
      src: ./haproxy.cfg
-	 dst: /etc/haproxy/haproxy.cfg
-	 owner: root
+     dst: /etc/haproxy/haproxy.cfg
+     owner: root
      group: root
      mode: 0644
 
@@ -92,8 +92,8 @@
   tasks:
    - name: copy my.cnf to master 
      src: /opt/docker/mysql/master/my.cnf
-	 dst: /opt/docker/mysql/my.cnf
-	 owner: root
+     dst: /opt/docker/mysql/my.cnf
+     owner: root
      group: root
      mode: 0644
 
@@ -102,7 +102,7 @@
   tasks:
    - name: copy my.cnf to slave 
      src: /opt/docker/mysql/slave/my.cnf
-	 dst: /opt/docker/mysql/my.cnf
-	 owner: root
+     dst: /opt/docker/mysql/my.cnf
+     owner: root
      group: root
      mode: 0644
