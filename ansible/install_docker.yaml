@@ -3,7 +3,7 @@
 - hosts: centos7-lemp
 
   tasks:
-    - name: upgrade all packages
+    - name: upgrade  packages
       yum: name=* state=latest
   tasks:
     - name: Install yum utils
