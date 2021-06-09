@@ -2,7 +2,7 @@ version: '3'
 services:
 
  web_srv:
-  image: nginx:latest
+  image: "nginx:latest"
   container_name: web_srv
   restart: unless-stopped
   volumes:
@@ -14,22 +14,17 @@ services:
    - "443:443"
 
  database_srv:
-  image: mariadb:latest
+  image: "mariadb:latest"
   container_name: database_srv
   restart: unless-stopped
   ports:
    - "3306:3306"
-  environment:
-   MYSQL_ROOT_PASSWORD: strongrootpassword888***11
-   MYSQL_DATABASE: appbd
-   MYSQL_USER: appuser
-   MYSQL_PASSWORD: appbdpassword
   volumes:
     - ./mysql:/var/lib/mysql
     - ./mysql:/etc/mysql
 
   php_srv:
-   image: php:7.5-fpm
+   image: "php:7.5-fpm"
    container_name: php_srv
    volumes:
     - ./nginx/www:/var/www
@@ -38,9 +33,17 @@ services:
     - "9000:9000"       
 
   memcached:
-    image: memcached:latest
+    image: "memcached:latest"
     container_name: mem_srv
     restart: unless-stopped
     ports:
       - "11211:11211"
-
+      
+  haproxy:
+    image: "haproxy:2.4"
+    container_name: haproxy_srv
+    ports:
+      - 8080:80
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./cert.pem:/etc/ssl/certs/site.pem
