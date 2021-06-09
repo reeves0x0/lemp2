@@ -37,7 +37,7 @@
          repo: "https://github.com/reeves0x0/lemp2.git"
          dest: /opt/docker/
          version: master
-		 
+
     - name: start docker-compose file
       docker_compose:
         project_src: /opt/docker/lemp2
