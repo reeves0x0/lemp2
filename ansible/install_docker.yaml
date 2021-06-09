@@ -10,18 +10,18 @@
   tasks:
     - name: upgrade all packages
       yum: name=* state=latest
-	  
+
   tasks:
     - name: Install soft
       yum:
         name: "{{ item }}"
         state: latest
-	  with_items:
+	with_items:
         - yum-utils
-		- lvm2
-		- device-mapper-persistent-data
-		- docker-ce
-		- git
+	- lvm2
+	- device-mapper-persistent-data
+	- docker-ce
+	- git
   
     - service:
       name: Enable services
@@ -34,15 +34,15 @@
       args:
         executable: /usr/bin/bash
 
-	- name: clone docker file from github
-	  git:
-	     repo: "https://github.com/reeves0x0/lemp2.git"
-		 dest: /opt/docker/
-		 version: master
+    - name: clone docker file from github
+      git:
+	 repo: "https://github.com/reeves0x0/lemp2.git"
+	 dest: /opt/docker/
+	 version: master
 		 
-	- name: start docker-compose file
+    - name: start docker-compose file
       docker_compose:
-	    project_src: /opt/docker/lemp2
-		files:
-		- docker-compose.yml
+        project_src: /opt/docker/lemp2
+	files:
+	- docker-compose.yml
 
