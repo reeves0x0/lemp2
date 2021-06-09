@@ -45,5 +45,5 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - ./cert.pem:/etc/ssl/certs/site.pem
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./haproxy/cert.pem:/etc/ssl/certs/site.pem
