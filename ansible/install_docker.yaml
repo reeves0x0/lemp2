@@ -1,6 +1,8 @@
 ---
 
 - hosts: centos7-lemp
+  vars_files:
+    - vars/default.yml
   tasks:
     - name: Add Docker repo
       get_url:
