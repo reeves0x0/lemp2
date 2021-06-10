@@ -6,8 +6,8 @@ server {
     access_log /var/log/nginx/{{ site_name }}/access.log;
     error_log /var/log/nginx/{{ site_name }}/error.log;
     
-    ssl_certificate /etc/nginx/conf.d/localhost.crt;
-	  ssl_certificate_key /etc/nginx/conf.d/private/localhost.key;
+    ssl_certificate /etc/nginx/conf.d/test-site.crt;
+    ssl_certificate_key /etc/nginx/conf.d/private/test-site.key;
     
     
     location / {
