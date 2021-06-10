@@ -19,6 +19,11 @@ services:
   restart: unless-stopped
   ports:
    - "3306:3306"
+  environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSSWORD}
   volumes:
     - ./mysql:/var/lib/mysql
     - ./mysql:/etc/mysql
