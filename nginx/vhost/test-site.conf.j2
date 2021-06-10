@@ -1,0 +1,21 @@
+server {
+    listen 443;
+    server_name {{ site_name }};
+    root /var/www/;
+    index index.php index.html index.htm;
+    access_log /var/log/nginx/{{ site_name }}/access.log;
+    error_log /var/log/nginx/{{ site_name }}/error.log;
+    
+    ssl_certificate /etc/nginx/conf.d/localhost.crt;
+	  ssl_certificate_key /etc/nginx/conf.d/private/localhost.key;
+    
+    
+    location / {
+        try_files $uri $uri/ /index.php;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+        include snippets/fastcgi-php.conf;
+    }
+}
