@@ -13,8 +13,8 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSSWORD}
   volumes:
-    - ./mysql:/var/lib/mysql
-    - ./mysql:/etc/mysql
+   - ./mysql:/var/lib/mysql
+   - ./mysql:/etc/mysql
 
  php_srv:
   image: "php:7.5-fpm-alpine"
@@ -31,10 +31,10 @@ services:
   container_name: haproxy_srv
   restart: always
   ports:
-    - 8080:80
+   - 8080:80
   volumes:
-    - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-    - ./haproxy/cert.pem:/etc/ssl/certs/test-site.pem
+   - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+   - ./haproxy/cert.pem:/etc/ssl/certs/test-site.pem
 
  web_srv:
   image: "nginx:alpine"
@@ -54,5 +54,5 @@ services:
     container_name: mem_srv
     restart: always
     ports:
-      - "11211:11211"
+     - "11211:11211"
       
