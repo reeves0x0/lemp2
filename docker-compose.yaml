@@ -13,8 +13,8 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSSWORD}
   volumes:
-   - ./mysql:/var/lib/mysql
-   - ./mysql:/etc/mysql
+   - ./mysql/DB:/var/lib/mysql
+   - ./mysql/conf:/etc/mysql
 
  php_srv:
   image: "php:7.5-fpm-alpine"
