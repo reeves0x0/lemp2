@@ -47,7 +47,9 @@ services:
    - ./nginx/cert:/etc/nginx/cert/
   ports:
    - "80:80"
-   - "443:443"      
+   - "443:443"
+  depends_on:
+    - php_srv
 
  memcached:
    image: "memcached:alpine"
