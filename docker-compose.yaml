@@ -41,7 +41,7 @@ services:
   container_name: web_srv
   restart: always
   volumes:
-   - ./nginx/vhosts:/etc/nginx/conf.d/
+   - ./nginx/vhost:/etc/nginx/conf.d/
    - ./nginx/www:/var/www/
    - ./nginx/logs:/var/log/nginx/
    - ./nginx/cert:/etc/nginx/
