@@ -17,12 +17,12 @@ services:
    - ./mysql/conf:/etc/mysql
 
  php_srv:
-  image: "php:7.5-fpm-alpine"
+  image: "php:7.4-fpm-alpine"
   container_name: php_srv
   restart: always
   volumes:
    - ./nginx/www:/var/www
-   - ./php-fpm:/etc/php/7.5/fpm/pool.d/
+   - ./php-fpm:/etc/php/7.4/fpm/pool.d/
   ports:
    - "9000:9000" 
 
