@@ -39,7 +39,7 @@ services:
  web_srv:
   image: "nginx:alpine"
   container_name: web_srv
-  rrestart: always
+  restart: always
   volumes:
    - ./nginx/vhosts:/etc/nginx/conf.d/
    - ./nginx/www:/var/www/
