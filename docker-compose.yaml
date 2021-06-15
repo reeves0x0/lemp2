@@ -34,7 +34,7 @@ services:
    - 8080:80
   volumes:
    - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-   - ./haproxy/cert.pem:/etc/ssl/certs/test-site.pem
+   - ./haproxy/test-site.pem:/etc/ssl/certs/test-site.pemtest-site.pem
 
  web_srv:
   image: "nginx:alpine"
