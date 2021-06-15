@@ -35,6 +35,8 @@ services:
   volumes:
    - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
    - ./haproxy/test-site.pem:/etc/ssl/certs/test-site.pemtest-site.pem
+  depends_on:
+    - web_srv
 
  web_srv:
   image: "nginx:alpine"
