@@ -44,7 +44,7 @@ services:
    - ./nginx/vhost:/etc/nginx/conf.d/
    - ./nginx/www:/var/www/
    - ./nginx/logs:/var/log/nginx/
-   - ./nginx/cert:/etc/nginx/
+   - ./nginx/cert:/etc/nginx/cert/
   ports:
    - "80:80"
    - "443:443"      
