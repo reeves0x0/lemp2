@@ -32,6 +32,7 @@ services:
   restart: always
   ports:
    - 8080:80
+   - 8081:443
   volumes:
    - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
    - ./haproxy/test-site.pem:/etc/ssl/certs/test-site.pem
