@@ -49,10 +49,10 @@ services:
    - "80:80"
    - "443:443"      
 
-  memcached:
-    image: "memcached:alpine"
-    container_name: mem_srv
-    restart: always
-    ports:
-     - "11211:11211"
+ memcached:
+   image: "memcached:alpine"
+   container_name: mem_srv
+   restart: always
+   ports:
+    - "11211:11211"
       
