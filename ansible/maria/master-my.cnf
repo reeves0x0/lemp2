@@ -1,0 +1,16 @@
+[mysqld]
+port = 3306
+socket = /var/lib/mysql/mysql.sock
+bind-address=0.0.0.0
+#max_connections=3985
+########replication#########
+server-id = 1                                      
+report_host = master                              
+log_bin = /var/lib/mysql/mariadb-bin               
+log_bin_index = /var/lib/mysql/mariadb-bin.index   
+relay_log = /var/lib/mysql/relay-bin
+relay_log_index = /var/lib/mysql/relay-bin.index
+#replicate-do-db = bd-name
+#binlog-ignore-db = db-name
+#expire_logs_days = 30
+#replicate-rewrite-db=
