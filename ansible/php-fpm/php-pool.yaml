@@ -1,0 +1,20 @@
+---
+
+- hosts: centos7-lemp
+
+  tasks:
+    - name: copy php-pool config
+      ansible.builtin.copy:
+      src: /opt/docker/lemp2/ansible/php-fpm/php-pool.conf
+      dest: /opt/docker/lemp2/php-fpm/php-pool.conf
+      owner: nginx
+      group: nginx
+      backup: yes
+
+  tasks:
+    - name: restart php-fpm container
+      docker_container:
+        name: php_srv
+        image: php:7.4-fpm-alpine
+        state: started
+        restart: yes
