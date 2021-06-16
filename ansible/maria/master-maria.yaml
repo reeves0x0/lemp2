@@ -1,0 +1,20 @@
+---
+
+- hosts: centos7-lemp
+
+  tasks:
+    - name: copy maria master config
+      ansible.builtin.copy:
+      src: /opt/docker/lemp2/ansible/maria/master-my.cnf
+      dest: /opt/docker/lemp2/mysql/conf/my.cnf
+      owner: mysql
+      group: mysql
+      backup: yes
+
+  tasks:
+    - name: restart mariaDB container
+      docker_container:
+        name: database_srv
+        image: mariadb:latest
+        state: started
+        restart: yes
