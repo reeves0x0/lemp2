@@ -1,0 +1,10 @@
+[mysqld]
+port = 3306
+socket = /var/lib/mysql/mysql.sock
+########replication##########
+server-id = 2
+report_host = slave2
+log_bin = /var/lib/mysql/mariadb-bin
+log_bin_index = /var/lib/mysql/mariadb-bin.index
+relay_log = /var/lib/mysql/relay-bin
+relay_log_index = /var/lib/mysql/relay-bin.index
