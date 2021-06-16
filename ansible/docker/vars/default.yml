@@ -1,0 +1,7 @@
+#ansible hosts
+
+#HTTP Settings
+site_name: "test-site.ru"
+
+#docker-compose VERSION
+docker_compose_version: "1.29.2"
