@@ -1,0 +1,20 @@
+---
+
+- hosts: centos7-lemp
+
+  tasks:
+    - name: copy HAproxy config
+      ansible.builtin.copy:
+      src: /opt/docker/lemp2/ansible/haproxy/haproxy.cfg
+      dest: /opt/docker/lemp2/haproxy/haproxy.cfg
+      owner: haproxy
+      group: haproxy
+      backup: yes
+
+  tasks:
+    - name: restart HAproxy container
+      docker_container:
+        name: haproxy_srv
+        image: haproxy:2.3-alpine
+        state: started
+        restart: yes
