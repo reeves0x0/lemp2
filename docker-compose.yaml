@@ -15,6 +15,7 @@ services:
   volumes:
    - ./mysql/DB:/var/lib/mysql
    - ./mysql/conf:/etc/mysql
+   - ./mysql/log:/var/log/mysql
 
  php_srv:
   image: "php:7.4-fpm-alpine"
