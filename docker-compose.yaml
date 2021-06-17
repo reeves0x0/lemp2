@@ -56,7 +56,7 @@ services:
     - php_srv
 
  memcached:
-   image: "memcached:alpine"
+   image: "memcached:1.6-alpine"
    container_name: mem_srv
    restart: always
    ports:
