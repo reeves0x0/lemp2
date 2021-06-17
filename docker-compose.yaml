@@ -13,17 +13,17 @@ services:
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
   volumes:
-   - ./mysql/DB:/var/lib/mysql
-   - ./mysql/conf:/etc/mysql
-   - ./mysql/log:/var/log/mysql
+   - /opt/docker/lemp2/mysql/DB:/var/lib/mysql
+   - /opt/docker/lemp2/mysql/conf:/etc/mysql
+   - /opt/docker/lemp2/mysql/log:/var/log/mysql
 
  php_srv:
   image: "php:7.4-fpm-alpine"
   container_name: php_srv
   restart: always
   volumes:
-   - ./nginx/www:/var/www
-   - ./php-fpm:/etc/php/7.4/fpm/pool.d/
+   - /opt/docker/lemp2/nginx/www:/var/www
+   - /opt/docker/lemp2/php-fpm:/etc/php/7.4/fpm/pool.d/
   ports:
    - "9000:9000" 
 
@@ -35,8 +35,8 @@ services:
    - 8080:80
    - 8081:443
   volumes:
-   - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-   - ./haproxy/test-site.pem:/etc/ssl/certs/test-site.pem
+   - /opt/docker/lemp2/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+   - /opt/docker/lemp2/haproxy/test-site.pem:/etc/ssl/certs/test-site.pem
   depends_on:
     - web_srv
 
@@ -45,10 +45,10 @@ services:
   container_name: web_srv
   restart: always
   volumes:
-   - ./nginx/vhost:/etc/nginx/conf.d/
-   - ./nginx/www:/var/www/
-   - ./nginx/logs:/var/log/nginx/
-   - ./nginx/cert:/etc/nginx/cert/
+   - /opt/docker/lemp2/nginx/vhost:/etc/nginx/conf.d/
+   - /opt/docker/lemp2/nginx/www:/var/www/
+   - /opt/docker/lemp2/nginx/logs:/var/log/nginx/
+   - /opt/docker/lemp2/nginx/cert:/etc/nginx/cert/
   ports:
    - "80:80"
    - "443:443"
