@@ -7,7 +7,8 @@ skip-character-set-client-handshake
 ########replication##########
 server-id = 2
 report_host = slave2
-log_bin = /var/lib/mysql/mariadb-bin
-log_bin_index = /var/lib/mysql/mariadb-bin.index
+log-bin = /var/log/mysql/mysql-bin
+log-bin-index = /var/log/mysql/mysql-bin.index
+log-error = /var/log/mysql/mysql-bin.err
 relay_log = /var/lib/mysql/relay-bin
 relay_log_index = /var/lib/mysql/relay-bin.index
