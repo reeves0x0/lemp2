@@ -12,4 +12,4 @@ docker-compose.yaml - собирает контейнеры nginx+mariadb+php-fp
 
 Плейбуки в папках lemp2/ansible/haproxy/  lemp2/ansible/maria/   lemp2/ansible/php-fpm/ предназначены для быстрой смены конфигов
        
-
+не забыть применить права на папку chmod 0777 -R /opt/docker/lemp2/mysql/log (ансибл)
