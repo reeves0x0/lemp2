@@ -24,6 +24,7 @@ services:
   volumes:
    - /opt/docker/lemp2/nginx/www:/var/www
    - /opt/docker/lemp2/php-fpm:/etc/php/7.4/fpm/pool.d/
+   - /opt/docker/lemp2/php-fpm/php.ini-production:/usr/local/etc/php/php.ini
   ports:
    - "9000:9000" 
 
