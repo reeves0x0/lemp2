@@ -1,6 +1,8 @@
 ---
 
 - hosts: centos7-lemp
+  vars_files:
+    - vars/default.yml
 
   tasks:
     - name: copy maria slave config
@@ -18,3 +20,10 @@
         image: mariadb:10.5
         state: started
         restart: yes
+        
+ - hosts:  <database_srv or IP container>
+   tasks:
+     - name: Check master replication status.
+       mysql_replication: mode=getmaster
+       delegate_to: ip_master_sql
+       register: master
