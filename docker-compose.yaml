@@ -50,6 +50,7 @@ services:
    - /opt/docker/lemp2/nginx/www:/var/www/
    - /opt/docker/lemp2/nginx/logs:/var/log/nginx/
    - /opt/docker/lemp2/nginx/cert:/etc/nginx/cert/
+   - /opt/docker/lemp2/nginx/nginx.conf:/etc/nginx/nginx.conf
   ports:
    - "80:80"
    - "443:443"
