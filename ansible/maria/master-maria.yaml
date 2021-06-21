@@ -1,6 +1,8 @@
 ---
 
 - hosts: centos7-lemp
+  vars_files:
+    - vars/default.yml
 
   tasks:
     - name: copy maria master config
@@ -15,6 +17,16 @@
     - name: restart mariaDB container
       docker_container:
         name: database_srv
-        image: mariadb:latest
+        image: mariadb:10.5
         state: started
         restart: yes
+
+- hosts:  <database_srv or IP container>
+  tasks:
+    - name: Create database user with name 'master' and password (look VARS) with all database privileges
+      community.mysql.mysql_user:
+        name: master
+        password: {{ master_password }}
+        priv: '*.*:REPLICATION SLAVE,REPLICATION CLIENT'
+        state: present
+        
