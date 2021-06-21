@@ -15,6 +15,6 @@
     - name: restart mariaDB container
       docker_container:
         name: database_srv
-        image: mariadb:latest
+        image: mariadb:10.5
         state: started
         restart: yes
