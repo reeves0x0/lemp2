@@ -23,8 +23,8 @@
 
 - hosts:  <database_srv or IP container>
   tasks:
-    - name: Create database user with name 'master' and password (look VARS) with all database privileges
-      community.mysql.mysql_user:
+    - name: Create database user with name 'master' and password (look VARS) with replication privileges
+      community.mysql.mysql_user: login_user=root login_password={{ DB_ROOT_PASSWORD }} 
         name: master
         password: {{ master_password }}
         priv: '*.*:REPLICATION SLAVE,REPLICATION CLIENT'
