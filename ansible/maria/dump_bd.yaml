@@ -1,0 +1,16 @@
+
+---
+
+- hosts: {{ master_srv }}
+  vars_files:
+    - vars/default.yml
+    
+   tasks:
+    - name: DUMP databases to VOLUME !!!
+      community.mysql.mysql_db: login_user=root login_password={{ DB_ROOT_PASSWORD }} 
+         state: dump
+         name:
+           - testbase
+       #    - db_2
+         target: /opt/docker/lemp2/mysql/DB/dump-testbase.sql
+         
