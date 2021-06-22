@@ -35,8 +35,5 @@
         
     - name: Start slave
       community.mysql.mysql_replication: login_user=root login_password={{ DB_ROOT_PASSWORD }} 
-      login_host: {{ slave_srv }}
-      
-      
-      
+        login_host: {{ slave_srv }}
         mode: startslave
