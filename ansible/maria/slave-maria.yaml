@@ -21,9 +21,3 @@
         state: started
         restart: yes
         
- - hosts:  <database_srv or IP container>
-   tasks:
-     - name: Check master replication status.
-       mysql_replication: mode=getmaster
-       delegate_to: ip_master_sql
-       register: master
