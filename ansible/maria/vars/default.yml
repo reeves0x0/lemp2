@@ -3,3 +3,9 @@ master_password: "NJshfpenhdooeeHV**55662HkaS"
 
 #mysql root password
 DB_ROOT_PASSWORD: "testpass"
+
+# master sql srv
+master_srv: "172.10.10.10"
+
+# slave sql srv
+slave_srv: "172.10.10.20"
