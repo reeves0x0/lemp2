@@ -1,2 +1,5 @@
 #password for master replication
 master_password: "NJshfpenhdooeeHV**55662HkaS"
+
+#mysql root password
+DB_ROOT_PASSWORD: "testpass"
