@@ -12,4 +12,19 @@ docker-compose.yaml - собирает контейнеры nginx+mariadb+php-fp
 
 Плейбуки в папках lemp2/ansible/haproxy/  lemp2/ansible/maria/   lemp2/ansible/php-fpm/ предназначены для быстрой смены конфигов
        
-не забыть применить права на папку chmod 0777 -R /opt/docker/lemp2/mysql/log (ансибл)
+не забыть применить права на папку chmod 0750 -R /opt/docker/lemp2/mysql/log (ансибл)
+
+
+<h3>maria BD replication (master-slave)</h3>
+
+для создания репликации БД необходимо запустить несколько плейбуков из папки lemp2/ansible/maria
+
+lemp2/ansible/maria/master-maria.yaml  обновить файл my.cnf (настройки для master) и перезапустит контейнер database_srv
+
+lemp2/ansible/maria/slave-maria.yaml  обновить файл my.cnf (настройки для slave) и перезапустит контейнер database_srv
+
+lemp2/ansible/maria/dump_bd.yaml сделает бэкап базы на мастере и сложит его volume 
+
+lemp2/ansible/maria/restore_bd.yaml  заберет бэкап бд из volume на локальный сервер, скопирует его на slave, создаст БД и восстановит базу из бэкапа
+
+lemp2/ansible/maria/replication.yaml Настройка самой репликации.Создает юзера для репликаци, забирает данные binlog position/file и передает их передает их на slave
