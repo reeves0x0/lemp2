@@ -11,6 +11,5 @@
          state: dump
          name:
            - testbase
-       #    - db_2
          target: /opt/docker/lemp2/mysql/DB/dump-testbase.sql
          
