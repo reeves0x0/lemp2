@@ -1,0 +1,33 @@
+---
+
+- hosts: centos7-lemp
+  vars_files:
+    - vars/default.yml
+    
+   tasks:  
+    - name: fetch dump bd to ansible server (locahost)
+      ansible.builtin.fetch:
+        src: /opt/docker/lemp2/mysql/DB/dump-testbase.sql
+        dest: /tmp/dump-testbase.sql
+    
+   tasks:
+    - name: copy dump bd from localhost (ansible server) to remote host centos7-lemp
+      ansible.builtin.copy:
+        src: /tmp/dump-testbase.sql
+        dest: /opt/docker/lemp2/mysql/dump-bd/dump-testbase.sql
+        
+  - hosts: {{ slave_srv }}
+     tasks:
+      - name: Create new databases with names (testbase) for restore
+        community.mysql.mysql_db: login_user=root login_password={{ DB_ROOT_PASSWORD }} 
+        name:
+          - testbase
+        state: present
+        
+      tasks:   
+     - name: Restore database ignoring errors
+       community.mysql.mysql_db: login_user=root login_password={{ DB_ROOT_PASSWORD }} 
+         name: testbase
+         state: import
+         target: /opt/docker/lemp2/mysql/dump-bd/dump-testbase.sql
+         force: yes
