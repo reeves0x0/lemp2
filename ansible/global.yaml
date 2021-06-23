@@ -1,0 +1,16 @@
+---
+
+- hosts: lemp
+
+  tasks:
+    - name: run playbook (install docker)
+    - include: /opt/docker/lemp2/ansible/docker/install_docker.yaml 
+  
+  tasks:
+    - name: run playbook (configure maria DB replication)
+    - include: /opt/docker/lemp2/ansible/maria/master-maria.yaml
+    - include: /opt/docker/lemp2/ansible/maria/slave-maria.yaml
+    - include: /opt/docker/lemp2/ansible/maria/dump_bd.yaml
+    - include: /opt/docker/lemp2/ansible/maria/restore_bd.yaml
+    - include: /opt/docker/lemp2/ansible/maria/replication.yaml
+    
