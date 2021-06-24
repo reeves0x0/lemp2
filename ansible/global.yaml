@@ -4,13 +4,55 @@
 
   tasks:
     - name: run playbook (install docker)
-    - include: /opt/docker/lemp2/ansible/docker/install_docker.yaml 
+    - import_tasks: /opt/docker/lemp2/ansible/docker/install_docker.yaml 
+      tags:
+        - ins_docker
   
   tasks:
-    - name: run playbook (configure maria DB replication)
-    - include: /opt/docker/lemp2/ansible/maria/master-maria.yaml
-    - include: /opt/docker/lemp2/ansible/maria/slave-maria.yaml
-    - include: /opt/docker/lemp2/ansible/maria/dump_bd.yaml
-    - include: /opt/docker/lemp2/ansible/maria/restore_bd.yaml
-    - include: /opt/docker/lemp2/ansible/maria/replication.yaml
-    
+    - name: run playbook (configure maria DB MASTER)
+    - import_tasks: /opt/docker/lemp2/ansible/maria/master-maria.yaml
+      tags:
+        - conf_master
+        
+   tasks: 
+    - name: run playbook (configure maria DB slave)
+    - import_tasks: /opt/docker/lemp2/ansible/maria/slave-maria.yaml
+      tags:
+        - conf_slave
+        
+   tasks:
+    - name: dump database
+    - import_tasks: /opt/docker/lemp2/ansible/maria/dump_bd.yaml
+      tags:
+        - dump_db
+        
+   tasks:
+    - name: restore database on slave server
+    - import_tasks: /opt/docker/lemp2/ansible/maria/restore_bd.yaml
+      tags:
+        - restore_bd
+        
+    tasks:
+       - name: configure replication
+       - import_tasks: /opt/docker/lemp2/ansible/maria/replication.yaml
+         tags:
+           - replica
+           
+    tasks:
+       - name: configure php-fpm
+       - import_tasks: /opt/docker/lemp2/ansible/php-fpm/php-pool.yaml 
+         tags:
+           - php_pool
+     
+    tasks:
+       - name: configure HAproxy
+       - import_tasks: /opt/docker/lemp2/ansible/haproxy/haproxy.yaml 
+         tags:
+           - haproxy
+           
+    tasks:
+       - name: configure nginx
+       - import_tasks: /opt/docker/lemp2/ansible/nginx/nginx.yaml
+         tags:
+           - nginx
+
