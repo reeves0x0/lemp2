@@ -13,3 +13,8 @@ git clone https://github.com/reeves0x0/lemp2
  
 ansible-playbook /opt/docker/lemp2/ansible/global.yaml
  
+<hr></hr>
+<h3>Benchmark (yandex Tank)</h3>
+
+
+docker run --rm -v /opt/docker/lemp2/benchmark:/var/loadtest -it --network lemp2_default direvius/yandex-tank
