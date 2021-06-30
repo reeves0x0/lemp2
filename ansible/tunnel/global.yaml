@@ -1,0 +1,19 @@
+---
+
+- hosts: 1.1.1.1
+
+  tasks:
+    - name: run playbook (/opt/docker/lemp2/ansible/tunnel/gateway.yaml)
+    - import_tasks: /opt/docker/lemp2/ansible/tunnel/gateway.yaml   
+      tags:
+        - conf_gate
+        
+- hosts: ip_client
+
+  tasks:
+    - name: run playbook (/opt/docker/lemp2/ansible/tunnel/client.yaml)
+    - import_tasks: /opt/docker/lemp2/ansible/tunnel/client.yaml   
+      tags:
+        - conf_client
+        
+  
