@@ -4,8 +4,10 @@ Host bastion
   Port 22
   IdentityFile ~/.ssh/id_rsa
   
-Host 192.168.1.*
+Host srv-01
+  Hostname 192.168.1.100
   User root
+  port 22
   IdentityFile ~/.ssh/id_rsa
   ProxyJump bastion
   ServerAliveInterval 30
