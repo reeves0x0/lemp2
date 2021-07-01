@@ -1,0 +1,34 @@
+
+---
+
+- hosts: 1.1.1.1
+
+    
+  tasks:    
+    - name: auth sshd  
+    - lineinfile: dest=/etc/ssh/sshd_config regexp='^#?PermitTunnel' line='PermitTunnel no'
+    - lineinfile: dest=/etc/ssh/sshd_config regexp='^#?PermitRootLogin' line='PermitRootLogin yes'
+    - lineinfile: dest=/etc/ssh/sshd_config regexp='^#?PermitTTY' line='PermitTTY no'
+    - lineinfile: dest=/etc/ssh/sshd_config regexp='^#?X11Forwarding' line='X11Forwarding no'
+    - lineinfile: dest=/etc/ssh/sshd_config regexp='^#?GatewayPorts' line='GatewayPorts no'
+      tags:
+        - sshd_conf
+    
+  tasks:    
+    - name: restart sshd
+      service:
+        name: sshd
+        state: restarted
+      tags:
+        - sshd_restart
+   
+- hosts: 127.0.0.1
+  tasks: 
+    - name: copy ssh conf
+      ansible.builtin.copy:
+      src: /opt/docker/lemp2/ansible/tunnel/ansible_ssh_config.txt
+      dest: /root/.ssh/config
+      owner: root
+      group: root
+      tags:
+        - cp_ssh_conf
