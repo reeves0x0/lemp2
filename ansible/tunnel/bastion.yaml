@@ -32,3 +32,9 @@
       group: root
       tags:
         - cp_bastion_conf
+        
+  tasks:
+    - name: plug bastion conf
+      lineinfile: dest=/etc/ansible/ansible.cfg insertafter="^# ssh arguments to use" line="ssh_args = -F /etc/ansible/bastion.conf" 
+      tags:
+        - plug_bastion
