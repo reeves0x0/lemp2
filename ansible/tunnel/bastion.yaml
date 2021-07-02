@@ -24,11 +24,11 @@
    
 - hosts: 127.0.0.1
   tasks: 
-    - name: copy ssh conf
+    - name: copy bastion conf
       ansible.builtin.copy:
       src: /opt/docker/lemp2/ansible/tunnel/ansible_ssh_config.txt
-      dest: /root/.ssh/config
+      dest: /etc/ansible/bastion.conf
       owner: root
       group: root
       tags:
-        - cp_ssh_conf
+        - cp_bastion_conf
