@@ -20,6 +20,27 @@ services:
    command:                                                                                                                                                                                          
     - '-m 100'                                                                                                                                                                                      
     - '-p 11222'
+    
+
+ memcached3:
+   image: "memcached:1.6-alpine"
+   container_name: mem_srv_3
+   restart: always
+   ports:
+    - "11233:11233"
+   command:                                                                                                                                                                                          
+    - '-m 100'                                                                                                                                                                                      
+    - '-p 11233'
+    
+ memcached4:
+   image: "memcached:1.6-alpine"
+   container_name: mem_srv_4
+   restart: always
+   ports:
+    - "11244:11244"
+   command:                                                                                                                                                                                          
+    - '-m 100'                                                                                                                                                                                      
+    - '-p 11244'
 
  database_srv:
   image: "mariadb:10.5"
