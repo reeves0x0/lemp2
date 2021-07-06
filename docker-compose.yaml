@@ -1,6 +1,26 @@
 version: '3'
 services:
 
+ memcached1:
+   image: "memcached:1.6-alpine"
+   container_name: mem_srv_1
+   restart: always
+   ports:
+    - "11211:11211"
+   command:                                                                                                                                                                                          
+    - '-m 100'                                                                                                                                                                                      
+    - '-p 11211'
+    
+ memcached2:
+   image: "memcached:1.6-alpine"
+   container_name: mem_srv_2
+   restart: always
+   ports:
+    - "11222:11222"
+   command:                                                                                                                                                                                          
+    - '-m 100'                                                                                                                                                                                      
+    - '-p 11222'
+
  database_srv:
   image: "mariadb:10.5"
   container_name: database_srv
@@ -55,12 +75,4 @@ services:
    - "80:80"
    - "443:443"
   depends_on:
-    - php_srv
-
- memcached:
-   image: "memcached:1.6-alpine"
-   container_name: mem_srv
-   restart: always
-   ports:
-    - "11211:11211"
-      
+    - php_srv  
