@@ -1,6 +1,7 @@
 ---
 
 - hosts: centos7-lemp
+  user: ansi
   vars_files:
     - vars/default.yml
   tasks:
@@ -8,10 +9,12 @@
       get_url:
         url: https://download.docker.com/linux/centos/docker-ce.repo
         dest: /etc/yum.repos.d/docker-ce.repo
+      become: yes
  
   tasks:
     - name: upgrade all packages
       yum: name=* state=latest
+      become: yes
 
   tasks:
     - name: Install soft
@@ -22,12 +25,14 @@
         - device-mapper-persistent-data
         - docker-ce
         - git
+      become: yes
   
     - service:
       name: Enable services
       service: name={{ item }} state=started enabled=yes
       with_items: 
         - docker
+      become: yes
 
     - name: install docker-compose
       get_url:
@@ -35,15 +40,19 @@
         dest: /usr/local/bin/docker-compose
         mode: 'a+x'
         force: yes
+      become: yes
       
     - name: clone docker file from github
       git:
          repo: "https://github.com/reeves0x0/lemp2.git"
          dest: /opt/docker/
          version: main
+      become: yes
 
     - name: start docker-compose file
       docker_compose:
         project_src: /opt/docker/lemp2
         files:
         - docker-compose.yml
+      become: yes
+
