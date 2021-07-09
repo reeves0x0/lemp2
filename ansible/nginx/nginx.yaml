@@ -1,6 +1,7 @@
 ---
 
 - hosts: centos7-lemp
+  user: ansi
 
   tasks:
     - name: copy MAIN nginx config
@@ -10,6 +11,7 @@
       owner: nginx
       group: nginx
       backup: yes
+      become: yes
 
   tasks:
     - name: restart web_srv container
@@ -18,3 +20,4 @@
         image: nginx:alpine
         state: started
         restart: yes
+        become: yes
