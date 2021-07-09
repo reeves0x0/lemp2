@@ -1,6 +1,7 @@
 ---
 
 - hosts: {{ ip_db }}
+  user: ansi
   vars_files:
     - vars/default.yml
     
@@ -11,7 +12,7 @@
         password: {{ master_password }}
         priv: '*.*:REPLICATION SLAVE,REPLICATION CLIENT'
         state: present
-        
+      become: yes
         
     - name: Get master binlog file name and binlog position AND returt value to slave_srv !!!  
       community.mysql.mysql_replication: login_user=root login_password={{ DB_ROOT_PASSWORD }} 
@@ -19,11 +20,13 @@
          mode: getmaster
          delegate_to: {{ master_srv }}
          register: master
+       become: yes
          
     - name: Stop slave 
       community.mysql.mysql_replication: login_user=root login_password={{ DB_ROOT_PASSWORD }} 
         login_host: {{ slave_srv }}
         mode: stopslave
+      become: yes
         
     - name: Change master to master server (master_srv) and use binary log mysql with position
       community.mysql.mysql_replication: login_user=master login_password={{ master_password }} 
@@ -32,8 +35,10 @@
         master_host: {{ master_srv }}
         master_log_file: {{ master.File }}
         master_log_pos: {{ master.Position }}
+      become: yes
         
     - name: Start slave
       community.mysql.mysql_replication: login_user=root login_password={{ DB_ROOT_PASSWORD }} 
         login_host: {{ slave_srv }}
         mode: startslave
+      become: yes
