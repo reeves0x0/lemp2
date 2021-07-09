@@ -1,6 +1,7 @@
 ---
 
 - hosts: centos7-lemp
+  user: ansi
   vars_files:
     - vars/default.yml
     
@@ -9,12 +10,14 @@
       ansible.builtin.fetch:
         src: /opt/docker/lemp2/mysql/DB/dump-testbase.sql
         dest: /tmp/dump-testbase.sql
+      become: yes
     
    tasks:
     - name: copy dump bd from localhost (ansible server) to remote host centos7-lemp
       ansible.builtin.copy:
         src: /tmp/dump-testbase.sql
         dest: /opt/docker/lemp2/mysql/dump-bd/dump-testbase.sql
+      become: yes
         
   - hosts: {{ slave_srv }}
      tasks:
@@ -23,6 +26,7 @@
         name:
           - testbase
         state: present
+        become: yes
         
       tasks:   
      - name: Restore database ignoring errors
@@ -31,3 +35,4 @@
          state: import
          target: /opt/docker/lemp2/mysql/dump-bd/dump-testbase.sql
          force: yes
+       become: yes
