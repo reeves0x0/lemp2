@@ -11,7 +11,7 @@ mkdir /opt/docker && cd /opt/docker/
 
 git clone https://github.com/reeves0x0/lemp2
  
-ansible-playbook /opt/docker/lemp2/ansible/global.yaml
+ansible-playbook /opt/docker/lemp2/ansible/global.yaml --ask-vault-pass 
  
 <hr></hr>
 <h3>Benchmark (yandex Tank)</h3>
