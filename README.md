@@ -1,4 +1,4 @@
-![lemp-structure](https://user-images.githubusercontent.com/36474638/122211855-dc90ae00-ceaf-11eb-96ec-94c14e014313.png)
+![tree](https://user-images.githubusercontent.com/36474638/125097304-aaedba00-e0de-11eb-823c-ae00c52edd53.png)
 
 <h3>Описание</h3>
 1 STACK ginx+mariadb+php-fpm+memcached+haproxy
