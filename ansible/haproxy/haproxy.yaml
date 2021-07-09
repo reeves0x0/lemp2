@@ -1,6 +1,7 @@
 ---
 
 - hosts: centos7-lemp
+  user: ansi
 
   tasks:
     - name: copy HAproxy config
@@ -10,6 +11,7 @@
       owner: haproxy
       group: haproxy
       backup: yes
+      become: yes
 
   tasks:
     - name: restart HAproxy container
@@ -18,3 +20,4 @@
         image: haproxy:2.3-alpine
         state: started
         restart: yes
+        become: yes
