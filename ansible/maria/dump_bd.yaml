@@ -2,6 +2,7 @@
 ---
 
 - hosts: {{ master_srv }}
+  user: ansi
   vars_files:
     - vars/default.yml
     
@@ -12,4 +13,4 @@
          name:
            - testbase
          target: /opt/docker/lemp2/mysql/DB/dump-testbase.sql
-         
+      become: yes
