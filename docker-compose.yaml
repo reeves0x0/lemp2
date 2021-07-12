@@ -6,48 +6,67 @@ services:
    container_name: mem_srv_1
    restart: always
    ports:
-    - "11211:11211"
+    - "127.0.0.1:11211:11211"
    command:                                                                                                                                                                                          
     - '-m 100'                                                                                                                                                                                      
     - '-p 11211'
+   deploy:
+     resources:
+       limits:
+         cpus: 0.05
+         memory: 50m
     
  memcached2:
    image: "memcached:1.6-alpine"
    container_name: mem_srv_2
    restart: always
    ports:
-    - "11222:11222"
+    - "127.0.0.1:11222:11222"
    command:                                                                                                                                                                                          
     - '-m 100'                                                                                                                                                                                      
     - '-p 11222'
-    
+   deploy:
+     resources:
+       limits:
+         cpus: 0.05
+         memory: 50m
 
  memcached3:
    image: "memcached:1.6-alpine"
    container_name: mem_srv_3
    restart: always
    ports:
-    - "11233:11233"
+    - "127.0.0.1:11233:11233"
    command:                                                                                                                                                                                          
     - '-m 100'                                                                                                                                                                                      
     - '-p 11233'
+   deploy:
+     resources:
+       limits:
+         cpus: 0.05
+         memory: 50m
     
  memcached4:
    image: "memcached:1.6-alpine"
    container_name: mem_srv_4
    restart: always
    ports:
-    - "11244:11244"
+    - "127.0.0.1:11244:11244"
    command:                                                                                                                                                                                          
     - '-m 100'                                                                                                                                                                                      
     - '-p 11244'
+   deploy:
+     resources:
+       limits:
+         cpus: 0.05
+         memory: 50m
 
  database_srv:
   image: "mariadb:10.5"
   container_name: database_srv
   restart: always
   ports:
-   - "3306:3306"
+   - "127.0.0.1:3306:3306"
   environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
@@ -57,6 +76,11 @@ services:
    - /opt/docker/lemp2/mysql/DB:/var/lib/mysql
    - /opt/docker/lemp2/mysql/conf:/etc/mysql
    - /opt/docker/lemp2/mysql/log:/var/log/mysql
+   deploy:
+     resources:
+       limits:
+         cpus: 0.25
+         memory: 500m
 
  php_srv:
   image: "php:7.4-fpm-alpine"
@@ -67,7 +91,12 @@ services:
    - /opt/docker/lemp2/php-fpm:/etc/php/7.4/fpm/pool.d/
    - /opt/docker/lemp2/php-fpm/php.ini-production:/usr/local/etc/php/php.ini
   ports:
-   - "9000:9000" 
+   - "127.0.0.1:9000:9000"
+   deploy:
+     resources:
+       limits:
+         cpus: 0.25
+         memory: 450m
 
  haproxy:
   image: "haproxy:2.3-alpine"
@@ -81,6 +110,11 @@ services:
    - /opt/docker/lemp2/haproxy/test-site.pem:/etc/ssl/certs/test-site.pem
   depends_on:
     - web_srv
+   deploy:
+     resources:
+       limits:
+         cpus: 0.10
+         memory: 150m
 
  web_srv:
   image: "nginx:alpine"
@@ -93,7 +127,13 @@ services:
    - /opt/docker/lemp2/nginx/cert:/etc/nginx/cert/
    - /opt/docker/lemp2/nginx/nginx.conf:/etc/nginx/nginx.conf
   ports:
-   - "80:80"
-   - "443:443"
+   - "127.0.0.1:80:80"
+   - "127.0.0.1:443:443"
   depends_on:
-    - php_srv  
+    - php_srv
+
+  deploy:
+    resources:
+      limits:
+        cpus: 0.20
+        memory: 200m
