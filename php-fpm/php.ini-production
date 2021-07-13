@@ -309,7 +309,7 @@ serialize_precision = -1
 ; This directive allows you to disable certain functions.
 ; It receives a comma-delimited list of function names.
 ; http://php.net/disable-functions
-disable_functions =
+disable_functions = show_source, system, shell_exec
 
 ; This directive allows you to disable certain classes.
 ; It receives a comma-delimited list of class names.
@@ -376,7 +376,7 @@ zend.exception_ignore_args = On
 ; threat in any way, but it makes it possible to determine whether you use PHP
 ; on your server or not.
 ; http://php.net/expose-php
-expose_php = On
+expose_php = Off
 
 ;;;;;;;;;;;;;;;;;;;
 ; Resource Limits ;
@@ -385,7 +385,7 @@ expose_php = On
 ; Maximum execution time of each script, in seconds
 ; http://php.net/max-execution-time
 ; Note: This directive is hardcoded to 0 for the CLI SAPI
-max_execution_time = 30
+max_execution_time = 20
 
 ; Maximum amount of time each script may spend parsing request data. It's a good
 ; idea to limit this time on productions servers in order to eliminate unexpectedly
@@ -395,7 +395,7 @@ max_execution_time = 30
 ; Development Value: 60 (60 seconds)
 ; Production Value: 60 (60 seconds)
 ; http://php.net/max-input-time
-max_input_time = 60
+max_input_time = 30
 
 ; Maximum input variable nesting level
 ; http://php.net/max-input-nesting-level
@@ -535,7 +535,7 @@ report_memleaks = On
 ; Development Value: Off
 ; Production Value: Off
 ; http://php.net/track-errors
-;track_errors = Off
+track_errors = Off
 
 ; Turn off normal error reporting and emit XML-RPC error XML
 ; http://php.net/xmlrpc-errors
@@ -549,7 +549,7 @@ report_memleaks = On
 ; the error message is formatted as HTML or not.
 ; Note: This directive is hardcoded to Off for the CLI SAPI
 ; http://php.net/html-errors
-;html_errors = On
+html_errors = Off
 
 ; If html_errors is set to On *and* docref_root is not empty, then PHP
 ; produces clickable error messages that direct to a page describing the error
@@ -1349,14 +1349,14 @@ bcmath.scale = 0
 ; vulnerability. It is disabled by default for maximum compatibility, but
 ; enabling it is encouraged.
 ; https://wiki.php.net/rfc/strict_sessions
-session.use_strict_mode = 0
+session.use_strict_mode = 1
 
 ; Whether to use cookies.
 ; http://php.net/session.use-cookies
 session.use_cookies = 1
 
 ; http://php.net/session.cookie-secure
-;session.cookie_secure =
+session.cookie_secure = On
 
 ; This option forces PHP to fetch and use a cookie for storing and maintaining
 ; the session id. We encourage this operation as it's very helpful in combating
@@ -1387,8 +1387,8 @@ session.cookie_domain =
 
 ; Whether or not to add the httpOnly flag to the cookie, which makes it
 ; inaccessible to browser scripting languages such as JavaScript.
-; http://php.net/session.cookie-httponly
-session.cookie_httponly =
+; http://php.net/session.cookie-httponly (к сожалению, эта функция поддерживается не всеми браузерами)
+session.cookie_httponly = On 
 
 ; Add SameSite attribute to cookie to help mitigate Cross-Site Request Forgery (CSRF/XSRF)
 ; Current valid values are "Strict", "Lax" or "None". When using "None",
@@ -1466,7 +1466,7 @@ session.use_trans_sid = 0
 ; Default Value: 32
 ; Development Value: 26
 ; Production Value: 26
-session.sid_length = 26
+session.sid_length = 48
 
 ; The URL rewriter will look for URLs in a defined set of HTML tags.
 ; <form> is special; if you include them here, the rewriter will
@@ -1503,7 +1503,7 @@ session.trans_sid_tags = "a=href,area=href,frame=src,form="
 ; Development Value: 5
 ; Production Value: 5
 ; http://php.net/session.hash-bits-per-character
-session.sid_bits_per_character = 5
+session.sid_bits_per_character = 6
 
 ; Enable upload progress tracking in $_SESSION
 ; Default Value: On
