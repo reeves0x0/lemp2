@@ -62,20 +62,20 @@ services:
          memory: 50m
 
  database_srv:
-  image: "mariadb:10.5"
-  container_name: database_srv
-  restart: always
-  ports:
-   - "127.0.0.1:3306:3306"
-  environment:
+   image: "mariadb:10.5"
+   container_name: database_srv
+   restart: always
+   ports:
+     - "127.0.0.1:3306:3306"
+   environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USER}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-  volumes:
-   - /opt/docker/lemp2/mysql/DB:/var/lib/mysql
-   - /opt/docker/lemp2/mysql/conf:/etc/mysql
-   - /opt/docker/lemp2/mysql/log:/var/log/mysql
+   volumes:
+     - /opt/docker/lemp2/mysql/DB:/var/lib/mysql
+     - /opt/docker/lemp2/mysql/conf:/etc/mysql
+     - /opt/docker/lemp2/mysql/log:/var/log/mysql
    deploy:
      resources:
        limits:
@@ -92,11 +92,11 @@ services:
    - /opt/docker/lemp2/php-fpm/php.ini-production:/usr/local/etc/php/php.ini
   ports:
    - "127.0.0.1:9000:9000"
-   deploy:
-     resources:
-       limits:
-         cpus: 0.25
-         memory: 450m
+  deploy:
+    resources:
+      limits:
+        cpus: 0.25
+        memory: 450m
 
  haproxy:
   image: "haproxy:2.3-alpine"
@@ -111,11 +111,11 @@ services:
    - /opt/docker/lemp2/haproxy/whitelist.lst:/usr/local/etc/haproxy/whitelist.lst
   depends_on:
     - web_srv
-   deploy:
-     resources:
-       limits:
-         cpus: 0.10
-         memory: 150m
+  deploy:
+    resources:
+      limits:
+        cpus: 0.10
+        memory: 150m
 
  web_srv:
   image: "nginx:alpine"
@@ -132,7 +132,6 @@ services:
    - "127.0.0.1:443:443"
   depends_on:
     - php_srv
-
   deploy:
     resources:
       limits:
