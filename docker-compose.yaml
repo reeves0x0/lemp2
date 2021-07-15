@@ -88,10 +88,13 @@ services:
   restart: always
   volumes:
    - /opt/docker/lemp2/nginx/www:/var/www
-   - /opt/docker/lemp2/php-fpm:/etc/php/7.4/fpm/pool.d/
+   - /opt/docker/lemp2/php-fpm/php-pool.conf:/usr/local/etc/php-fpm.d/php-pool.conf
+   - /opt/docker/lemp2/php-fpm/php-fpm.conf:/etc/php-fpm.d/php-fpm.conf
    - /opt/docker/lemp2/php-fpm/php.ini-production:/usr/local/etc/php/php.ini
   ports:
-   - "127.0.0.1:9000:9000"
+   - "9000:9000"
+   - "9001:9001"
+   - "9002:9002"
   deploy:
     resources:
       limits:
