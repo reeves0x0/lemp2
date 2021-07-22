@@ -112,6 +112,7 @@ services:
    - /opt/docker/lemp2/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
    - /opt/docker/lemp2/haproxy/test-site.pem:/etc/ssl/certs/test-site.pem
    - /opt/docker/lemp2/haproxy/whitelist.lst:/usr/local/etc/haproxy/whitelist.lst
+   - /opt/docker/lemp2/haproxy/black-ip.lst:/usr/local/etc/haproxy/black-ip.lst
   depends_on:
     - web_srv
   deploy:
