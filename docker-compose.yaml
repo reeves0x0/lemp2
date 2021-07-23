@@ -83,7 +83,8 @@ services:
          memory: 500m
 
  php_srv:
-  image: "php:7.4-fpm-alpine"
+  build: /opt/docker/lemp2/php-fpm 
+#  image: "php:7.4-fpm-alpine"
   container_name: php_srv
   restart: always
   volumes:
