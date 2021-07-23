@@ -1,0 +1,27 @@
+FROM php:7.4-fpm-alpine
+
+WORKDIR /var/www
+
+# requa
+RUN apk add --no-cache \
+    freetype \
+    libjpeg-turbo \
+    libpng \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    freetype-dev \
+    icu-dev \
+    libxml2-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    php7-mcrypt \
+    php7-common \
+    php7-pear \
+  && rm -rf /tmp/*
+
+# php-pclzip php-pecl-geoip php-pecl-memcached php-pecl-redis php-pecl-igbinary
+
+
+#show compiled module     docker run --rm php:7.4-fpm-alpine php -m
+RUN docker-php-ext-install  bcmath intl opcache  soap gd
