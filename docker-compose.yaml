@@ -82,25 +82,31 @@ services:
          cpus: 0.25
          memory: 500m
 
- php_srv:
+ php_srv_1:
   build: /opt/docker/lemp2/php-fpm 
 #  image: "php:7.4-fpm-alpine"
-  container_name: php_srv
+  container_name: php_srv_1
   restart: always
   volumes:
    - /opt/docker/lemp2/nginx/www:/var/www
-   - /opt/docker/lemp2/php-fpm/php-pool.conf:/usr/local/etc/php-fpm.d/php-pool.conf
-   - /opt/docker/lemp2/php-fpm/php-fpm.conf:/etc/php-fpm.d/php-fpm.conf
-   - /opt/docker/lemp2/php-fpm/php.ini-production:/usr/local/etc/php/php.ini
+   - /opt/docker/lemp2/php-fpm/php_srv_1/php-pool.conf:/usr/local/etc/php-fpm.d/php-pool.conf
+   - /opt/docker/lemp2/php-fpm/php_srv_1/php-fpm.conf:/etc/php-fpm.d/php-fpm.conf
+   - /opt/docker/lemp2/php-fpm/php_srv_1/php.ini-production:/usr/local/etc/php/php.ini
   ports:
-   - "9000:9000"
    - "9001:9001"
+   
+ php_srv_2:
+  build: /opt/docker/lemp2/php-fpm 
+#  image: "php:7.4-fpm-alpine"
+  container_name: php_srv-2
+  restart: always
+  volumes:
+   - /opt/docker/lemp2/nginx/www:/var/www
+   - /opt/docker/lemp2/php-fpm/php_srv_2/php-pool.conf:/usr/local/etc/php-fpm.d/php-pool.conf
+   - /opt/docker/lemp2/php-fpm/php_srv_2/php-fpm.conf:/etc/php-fpm.d/php-fpm.conf
+   - /opt/docker/lemp2/php-fpm/php_srv_2/php.ini-production:/usr/local/etc/php/php.ini
+  ports:
    - "9002:9002"
-  deploy:
-    resources:
-      limits:
-        cpus: 0.25
-        memory: 450m
 
  haproxy:
   image: "haproxy:2.3-alpine"
