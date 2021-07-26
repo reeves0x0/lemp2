@@ -83,7 +83,7 @@ services:
          memory: 500m
 
  php_srv_1:
-  build: /opt/docker/lemp2/php-fpm 
+  build: /opt/docker/lemp2/php-fpm/php_srv_1
 #  image: "php:7.4-fpm-alpine"
   container_name: php_srv_1
   restart: always
@@ -96,9 +96,9 @@ services:
    - "9001:9001"
    
  php_srv_2:
-  build: /opt/docker/lemp2/php-fpm 
+  build: /opt/docker/lemp2/php-fpm/php_srv_2
 #  image: "php:7.4-fpm-alpine"
-  container_name: php_srv-2
+  container_name: php_srv_2
   restart: always
   volumes:
    - /opt/docker/lemp2/nginx/www:/var/www
