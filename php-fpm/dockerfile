@@ -3,7 +3,14 @@ FROM php:7.4-fpm-alpine
 WORKDIR /var/www
 
 # requa
-RUN apk add --no-cache \
+RUN apk update && apk add --no-cache \
+    autoconf \
+    automake \
+    gcc \
+    make \
+    g++ \
+    zlib-dev \
+    libtool \
     freetype \
     libjpeg-turbo \
     libpng \
@@ -15,13 +22,20 @@ RUN apk add --no-cache \
     libxml2-dev \
     libjpeg-turbo-dev \
     libpng-dev \
+    libzip-dev \
+    libmemcached \
+    libmemcached-dev \
+    geoip\
+    geoip-dev \
     php7-mcrypt \
     php7-common \
     php7-pear \
   && rm -rf /tmp/*
 
-# php-pclzip php-pecl-geoip php-pecl-memcached php-pecl-redis php-pecl-igbinary
-
-
-#show compiled module     docker run --rm php:7.4-fpm-alpine php -m
-RUN docker-php-ext-install  bcmath intl opcache  soap gd
+#show precompiled module     docker run --rm php:7.4-fpm-alpine php -m
+RUN docker-php-ext-install  bcmath intl opcache  soap gd zip
+RUN pecl install geoip \
+    && pecl install memcached \
+    && pecl install redis \
+    && pecl install igbinary \
+    && docker-php-ext-enable redis geoip memcached igbinary
