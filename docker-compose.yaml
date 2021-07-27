@@ -94,6 +94,7 @@ services:
    - /opt/docker/lemp2/php-fpm/php_srv_1/php.ini-production:/usr/local/etc/php/php.ini
   ports:
    - "9001:9001"
+   - "9002:9002"
    
  php_srv_2:
   build: /opt/docker/lemp2/php-fpm/php_srv_2
@@ -106,7 +107,8 @@ services:
    - /opt/docker/lemp2/php-fpm/php_srv_2/php-fpm.conf:/etc/php-fpm.d/php-fpm.conf
    - /opt/docker/lemp2/php-fpm/php_srv_2/php.ini-production:/usr/local/etc/php/php.ini
   ports:
-   - "9002:9002"
+   - "9003:9003"
+   - "9004:9004"
 
  haproxy:
   image: "haproxy:2.3-alpine"
